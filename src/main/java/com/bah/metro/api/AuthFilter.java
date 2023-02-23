@@ -29,10 +29,11 @@ public class AuthFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		String uri = req.getRequestURI();
 		
-		if (uri.startsWith("/api/events") 
-				|| uri.startsWith("/api/registrations") 
-				|| uri.startsWith("/api/customers")) {
+		if (!uri.startsWith("/api/events") 
+		 && !uri.startsWith("/api/registrations") 
+		 && !uri.startsWith("/api/customers") ) {
 			// continue on to get-token endpoint
+			System.out.println(uri);
 			chain.doFilter(request, response);
 			return;
 		} else {
