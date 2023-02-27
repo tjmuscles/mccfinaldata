@@ -15,7 +15,7 @@ node {
     	
     	if(response=="Yes") {
     		stage('Deploy') {
-    			sh 'gradle build -x test'
+    			sh 'gradle test'
 			}
 		}
 	}
