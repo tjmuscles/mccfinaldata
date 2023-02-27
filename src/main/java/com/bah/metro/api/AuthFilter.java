@@ -33,7 +33,6 @@ public class AuthFilter implements Filter {
 		 && !uri.startsWith("/api/registrations") 
 		 && !uri.startsWith("/api/customers") ) {
 			// continue on to get-token endpoint
-			System.out.println(uri);
 			chain.doFilter(request, response);
 			return;
 		} else {
