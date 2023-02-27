@@ -4,7 +4,7 @@ node {
     }
     
     stage('Gradle build') {
-        sh 'gradle build -x test'
+        sh 'gradle clean build'
     }
     
     stage('User Acceptance Test') {
