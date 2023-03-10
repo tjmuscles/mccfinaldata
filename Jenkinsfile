@@ -32,9 +32,9 @@ node {
     	
     	if(response=="Yes") {
 		    stage('Deploy to K8S') {
-			   sh "docker stop event-data"
-	      sh "kubectl create deployment event-data --image=event-data:v1.0"
-	      sh "kubectl expose deployment event-data --type=LoadBalancer --port=8080"
+			   sh "docker stop mcc-data"
+	      sh "kubectl create deployment mcc-data --image=mcc-data:v1.0"
+	      sh "kubectl expose deployment mcc-data --type=LoadBalancer --port=8080"
 	
 		    }
 		}
