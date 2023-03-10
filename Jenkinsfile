@@ -1,5 +1,5 @@
 node {
-    stage('Checkout') {
+    stage('Checkout Data') {
         git url: 'https://github.com/tjmuscles/day6Data.git'
     }
     
@@ -31,11 +31,18 @@ node {
     	description: '', name: 'Pass')]
     	
     	if(response=="Yes") {
-		    stage('Release- DataService') {
-			 sh "docker stop mcc-data"
-		     sh 'echo MCC DataService is ready to release!'
+		    stage('Deploy to K8S') {
+			   sh "docker stop event-data"
+	      sh "kubectl create deployment event-data --image=event-data:v1.0"
+	      sh "kubectl expose deployment event-data --type=LoadBalancer --port=8080"
 	
 		    }
 		}
 	}
+	
+	    stage("Production Deployment View"){
+        sh "kubectl get deployments"
+        sh "kubectl get pods"
+        sh "kubectl get services"
+    }
 }
