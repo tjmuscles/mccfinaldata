@@ -10,7 +10,11 @@ node {
     stage ("Gradle Bootjar-Package - DataService") {
         sh 'gradle bootjar'
     }
-    
+
+    stage ("Start Minikube") {
+        sh 'minikube start'
+    }
+        
     stage("Set minikube environment"){
         sh "minikube docker-env"
         sh "eval \$(minikube -p minikube docker-env)"
