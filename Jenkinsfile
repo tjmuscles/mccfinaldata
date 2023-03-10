@@ -10,9 +10,15 @@ node {
     stage ("Gradle Bootjar-Package - DataService") {
         sh 'gradle bootjar'
     }
+    
+    stage("Set minikube environment"){
+        sh "minikube docker-env"
+        sh "eval \$(minikube -p minikube docker-env)"
+    }
 	
 	stage ("Containerize the app-docker build - DataApi") {
         sh 'docker build --rm -t mcc-data:v1.0 .'
+        sh 'minikube image load mcc-data:v1.0'
     }
     
     stage ("Inspect the docker image - DataApi"){
